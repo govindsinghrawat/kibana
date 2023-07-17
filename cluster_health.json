@@ -1,4 +1,6 @@
 https://opster.com/guides/elasticsearch/operations/elasticsearch-cluster-allocation-explain-api/
+https://www.datadoghq.com/blog/elasticsearch-unassigned-shards/#reason-2-too-many-shards-not-enough-nodes
+
 
 
 GET _cluster/allocation/explain?pretty
