@@ -1,3 +1,5 @@
+https://opster.com/guides/elasticsearch/operations/elasticsearch-cluster-allocation-explain-api/
+
 
 GET _cluster/allocation/explain?pretty
 {
