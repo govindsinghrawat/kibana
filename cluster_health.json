@@ -1,5 +1,5 @@
-https://opster.com/guides/elasticsearch/operations/elasticsearch-cluster-allocation-explain-api/
 https://www.datadoghq.com/blog/elasticsearch-unassigned-shards/#reason-2-too-many-shards-not-enough-nodes
+https://opster.com/guides/elasticsearch/operations/elasticsearch-cluster-allocation-explain-api/
 
 
 
@@ -107,6 +107,29 @@ GET _cluster/allocation/explain?pretty
     }
   ]
 }
+
+=============
+
+#Return all unassigned shards for an index product
+GET /_cat/shards/products?h=index,shard,prirep,state,unassigned.reason&format=json&s=index,shard
+GET /_cat/shards/products?format=json
+
+[
+  {
+    "index": "products",
+    "shard": "0",
+    "prirep": "p",
+    "state": "UNASSIGNED",
+    "unassigned.reason": "INDEX_CREATED"
+  },
+  {
+    "index": "products",
+    "shard": "0",
+    "prirep": "r",
+    "state": "UNASSIGNED",
+    "unassigned.reason": "INDEX_CREATED"
+  }
+]
 
 =============
 
