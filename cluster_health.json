@@ -1,0 +1,108 @@
+
+GET _cluster/allocation/explain?pretty
+{
+  "index": "products",
+  "shard": 0,
+  "primary": true
+}
+
+
+{
+  "index": "products",
+  "shard": 0,
+  "primary": true,
+  "current_state": "unassigned",
+  "unassigned_info": {
+    "reason": "INDEX_CREATED",
+    "at": "2023-07-17T00:16:21.717Z",
+    "last_allocation_status": "no"
+  },
+  "can_allocate": "no",
+  "allocate_explanation": "Elasticsearch isn't allowed to allocate this shard to any of the nodes in the cluster. Choose a node to which you expect this shard to be allocated, find this node in the node-by-node explanation, and address the reasons which prevent Elasticsearch from allocating this shard there.",
+  "node_allocation_decisions": [
+    {
+      "node_id": "3mppSeN7Qv6QfSEXYAXYsQ",
+      "node_name": "node-1",
+      "transport_address": "127.0.0.1:9300",
+      "node_attributes": {
+        "ml.allocated_processors_double": "8.0",
+        "ml.max_jvm_size": "8589934592",
+        "ml.allocated_processors": "8",
+        "ml.machine_memory": "17179869184",
+        "xpack.installed": "true"
+      },
+      "node_decision": "no",
+      "weight_ranking": 1,
+      "deciders": [
+        {
+          "decider": "disk_threshold",
+          "decision": "NO",
+          "explanation": "the node is above the high watermark cluster setting [cluster.routing.allocation.disk.watermark.high=90%], having less than the minimum required [46.5gb] free space, actual free: [32.2gb], actual used: [93%]"
+        }
+      ]
+    }
+  ]
+}
+
+
+=============
+
+
+GET _cluster/allocation/explain?pretty
+{
+  "index": "products",
+  "shard": 0,
+  "primary": false
+}
+
+
+
+{
+  "index": "products",
+  "shard": 0,
+  "primary": false,
+  "current_state": "unassigned",
+  "unassigned_info": {
+    "reason": "INDEX_CREATED",
+    "at": "2023-07-17T00:16:21.717Z",
+    "last_allocation_status": "no_attempt"
+  },
+  "can_allocate": "no",
+  "allocate_explanation": "Elasticsearch isn't allowed to allocate this shard to any of the nodes in the cluster. Choose a node to which you expect this shard to be allocated, find this node in the node-by-node explanation, and address the reasons which prevent Elasticsearch from allocating this shard there.",
+  "node_allocation_decisions": [
+    {
+      "node_id": "3mppSeN7Qv6QfSEXYAXYsQ",
+      "node_name": "node-1",
+      "transport_address": "127.0.0.1:9300",
+      "node_attributes": {
+        "ml.allocated_processors_double": "8.0",
+        "ml.max_jvm_size": "8589934592",
+        "ml.allocated_processors": "8",
+        "ml.machine_memory": "17179869184",
+        "xpack.installed": "true"
+      },
+      "node_decision": "no",
+      "weight_ranking": 1,
+      "deciders": [
+        {
+          "decider": "replica_after_primary_active",
+          "decision": "NO",
+          "explanation": "primary shard for this replica is not yet active"
+        },
+        {
+          "decider": "disk_threshold",
+          "decision": "NO",
+          "explanation": "the node is above the low watermark cluster setting [cluster.routing.allocation.disk.watermark.low=85%], having less than the minimum required [69.8gb] free space, actual free: [33.3gb], actual used: [92.8%]"
+        },
+        {
+          "decider": "throttling",
+          "decision": "NO",
+          "explanation": "primary shard for this replica is not yet active"
+        }
+      ]
+    }
+  ]
+}
+
+=============
+
